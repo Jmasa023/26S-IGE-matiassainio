@@ -105,6 +105,7 @@ MonoBehaviour:
   characterController: {fileID: 0}
   playerInput: {fileID: 0}
   movementSpeed: 5
+  bombPrefab: {fileID: 3337655397912920241, guid: 43ba2f75b52567e4fb79fa36945946c3, type: 3}
 --- !u!1 &3973387083163358441
 GameObject:
   m_ObjectHideFlags: 0

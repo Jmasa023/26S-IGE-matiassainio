@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController characterController;
     public PlayerInput playerInput;
     public float movementSpeed = 5f;
-
+    public GameObject bombPrefab;
     private Vector3 moveInput;
 
     public void Start()
@@ -24,9 +24,12 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector3(input.x, 0f, input.y);
     }
 
-    public void OnBomb()
+    void OnBomb()
     {
-        Debug.Log("Bomb dropped");
+        Vector3 spawnPos = new Vector3(transform.position.x, 0, transform.position.z);
+        GameObject bombObject = Instantiate(bombPrefab, spawnPos, Quaternion.identity);
+        Bomb bomb = bombObject.GetComponent<Bomb>();
+        bomb.SetOwner(gameObject);
     }
 
     public void Update()
