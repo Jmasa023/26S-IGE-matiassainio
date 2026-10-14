@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject bombPrefab;
     private Vector3 moveInput;
+    public int health = 2;
 
     public void Start()
     {
@@ -16,6 +17,16 @@ public class PlayerController : MonoBehaviour
 
         if (playerInput == null)
             playerInput = GetComponent<PlayerInput>();
+    GameManager.Instance.RegisterPlayer(this);
+    }
+    public void TakeDamage()
+    {
+        health -= 1;
+
+        if (health <= 0)
+        {
+            GameManager.Instance.HandlePlayerDeath();
+        }
     }
 
     public void OnMove(InputValue inputValue)
