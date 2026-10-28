@@ -72,7 +72,7 @@ public class Bomb : MonoBehaviour
                 }
             }
         }
-
+        AudioManager.Instance.PlayExplosionSfx();
         Destroy(gameObject);
     }
 }

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         RegisterDestructibleBlocks();
+        GameUI.Instance.SetLevelNameLabel(scene.name);
     }
 
     private void OnDestroy()
@@ -35,27 +36,31 @@ public class GameManager : MonoBehaviour
     public void RegisterPlayer(PlayerController player)
     {
         playerController = player;
+        AudioManager.Instance.PlayGameplayMusic();
     }
 
     public void HandlePlayerDeath()
     {
-        Debug.Log("Game Over!");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameUI.Instance.ShowGameOverWindow(true);
+        AudioManager.Instance.PlayGameOverMusic();
     }
     private void RegisterDestructibleBlocks()
     {
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Destructible");
         destructibleBlocksCount = blocks.Length;
+        GameUI.Instance.SetBlockCountLabel(destructibleBlocksCount);
     }
     public void BlockDestroyed()
-{
-    destructibleBlocksCount -= 1;
 
-    if (destructibleBlocksCount <= 0)
     {
-        HandlePlayerWin();
+        destructibleBlocksCount -= 1;
+        GameUI.Instance.SetBlockCountLabel(destructibleBlocksCount);
+        
+        if (destructibleBlocksCount <= 0)
+        {
+            HandlePlayerWin();
+        }
     }
-}
 
     public void HandlePlayerWin()
     {
@@ -75,5 +80,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Yessir you did it");
         }
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

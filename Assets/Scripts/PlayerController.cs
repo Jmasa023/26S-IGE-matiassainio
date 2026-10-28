@@ -17,14 +17,19 @@ public class PlayerController : MonoBehaviour
 
         if (playerInput == null)
             playerInput = GetComponent<PlayerInput>();
-    GameManager.Instance.RegisterPlayer(this);
+            
+        GameManager.Instance.RegisterPlayer(this);
+        GameUI.Instance.SetPlayerHealthLabel(health);
     }
     public void TakeDamage()
     {
         health -= 1;
+        AudioManager.Instance.PlayPlayerHitSfx();
+        GameUI.Instance.SetPlayerHealthLabel(health);
 
         if (health <= 0)
         {
+            playerInput.enabled = false;
             GameManager.Instance.HandlePlayerDeath();
         }
     }
