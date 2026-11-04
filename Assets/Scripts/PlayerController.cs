@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public GameObject bombPrefab;
     private Vector3 moveInput;
     public int health = 2;
+    public int bombExplosionRadius = 1;
+    public int maxActiveBombs = 1;
+    public float movementSpeedMultiplier = 1f;
+    private int currentActiveBombs = 0;
 
     public void Start()
     {
@@ -42,10 +46,15 @@ public class PlayerController : MonoBehaviour
 
     void OnBomb()
     {
+        if (currentActiveBombs >= maxActiveBombs)
+        {
+            return;
+        }
         Vector3 spawnPos = new Vector3(transform.position.x, 0, transform.position.z);
         GameObject bombObject = Instantiate(bombPrefab, spawnPos, Quaternion.identity);
         Bomb bomb = bombObject.GetComponent<Bomb>();
-        bomb.SetOwner(gameObject);
+        bomb.Initialize(this, bombExplosionRadius);
+        currentActiveBombs += 1;
     }
 
     public void Update()
@@ -55,6 +64,26 @@ public class PlayerController : MonoBehaviour
             transform.forward = moveInput;
         }
 
-        characterController.Move(moveInput * movementSpeed * Time.deltaTime);
+        characterController.Move(moveInput * movementSpeed * movementSpeedMultiplier * Time.deltaTime);
+    }
+    public void UpgradePowers(PowerUpType powerUpType)
+    {
+        switch (powerUpType)
+        {
+            case PowerUpType.FirePack:
+                bombExplosionRadius += 1;
+                break;
+            case PowerUpType.BombPack:
+                maxActiveBombs += 1;
+                break;
+            case PowerUpType.SpeedPack:
+                movementSpeedMultiplier += 1;
+                break;
+        }
+    }
+
+    public void OnBombDestroyed()
+    {
+        currentActiveBombs -= 1;
     }
 }

@@ -4,15 +4,18 @@ public class Bomb : MonoBehaviour
 {
     public Collider bombCollider;
     public float explosionTime;
-    public int explosionRadius;
+    private int explosionRadius;
 
     private float elapsedTime;
     private Collider ownerCollider;
     private bool isIgnoringOwnerCollider = true;
+    public PlayerController owner;
 
-    public void SetOwner(GameObject gameObject)
+    public void Initialize(PlayerController owner, int explosionRadius)
     {
-        ownerCollider = gameObject.GetComponent<Collider>();
+        this.owner = owner;
+        this.explosionRadius = explosionRadius;
+        ownerCollider = owner.GetComponent<Collider>();
         Physics.IgnoreCollision(ownerCollider, bombCollider, true);
     }
 
@@ -74,5 +77,9 @@ public class Bomb : MonoBehaviour
         }
         AudioManager.Instance.PlayExplosionSfx();
         Destroy(gameObject);
+    }
+    private void OnDestroy()
+    {
+        owner.OnBombDestroyed();
     }
 }

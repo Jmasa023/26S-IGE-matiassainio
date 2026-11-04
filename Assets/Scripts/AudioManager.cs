@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip explosionSfx;
     public AudioClip playerHitSfx;
     public AudioClip buttonClickSfx;
-
+    public AudioClip powerUpSfx;
     private void Awake()
     {
         if (Instance == null)
@@ -30,6 +30,10 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = gameplayMusic;
         musicSource.loop = true;
         musicSource.Play();
+    }
+    public void PlayPowerUpPickUpSfx()
+    {
+        sfxSource.PlayOneShot(powerUpSfx);
     }
 
     public void PlayGameOverMusic()

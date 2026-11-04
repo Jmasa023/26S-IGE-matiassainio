@@ -206,7 +206,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   explosionSfx: {fileID: 8300000, guid: b101ccb441b83cf40a65914a68c363fe, type: 3}
   playerHitSfx: {fileID: 8300000, guid: 25775270e0458bc439ab7a3da0c6fc00, type: 3}
   buttonClickSfx: {fileID: 8300000, guid: 446703976e249f54d967262dee6e74f6, type: 3}
+  powerUpSfx: {fileID: 0}
 --- !u!1 &9128846369998260693
 GameObject:
   m_ObjectHideFlags: 0
