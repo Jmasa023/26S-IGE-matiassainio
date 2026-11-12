@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip playerHitSfx;
     public AudioClip buttonClickSfx;
     public AudioClip powerUpSfx;
+    public AudioClip powerUpDestroyedSfx;
+    public AudioClip bombPlaceSfx;
     private void Awake()
     {
         if (Instance == null)
@@ -57,5 +59,14 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClickSfx()
     {
         sfxSource.PlayOneShot(buttonClickSfx);
+    }
+    public void PlayPowerUpDestroyedSfx()
+    {
+        sfxSource.PlayOneShot(powerUpDestroyedSfx, 5f);
+    }
+
+    public void PlayBombPlaceSfx()
+    {
+        sfxSource.PlayOneShot(bombPlaceSfx, 2f);
     }
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private PlayerController playerController;
     private int destructibleBlocksCount;
+    public bool isGameRunning;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         RegisterDestructibleBlocks();
         GameUI.Instance.SetLevelNameLabel(scene.name);
+        isGameRunning = true;
     }
 
     private void OnDestroy()
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void HandlePlayerDeath()
     {
+        isGameRunning = false;
         GameUI.Instance.ShowGameOverWindow(true);
         AudioManager.Instance.PlayGameOverMusic();
     }
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
 
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
+            isGameRunning = false;
             SceneManager.LoadScene(nextSceneIndex);
         }
         else

@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -206,7 +206,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -338,12 +338,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicSource: {fileID: 714847136106812196}
   sfxSource: {fileID: 1260521004002076663}
-  gameplayMusic: {fileID: 8300000, guid: 95c4a160e6953d74299ba89afaba53b7, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: 97225b24ce19e7245b01166132bbea0d, type: 3}
   gameOverMusic: {fileID: 8300000, guid: 59fa09060a8867641b104785365328fb, type: 3}
-  explosionSfx: {fileID: 8300000, guid: b101ccb441b83cf40a65914a68c363fe, type: 3}
+  explosionSfx: {fileID: 8300000, guid: 550907b5997298940bed7c54d2098030, type: 3}
   playerHitSfx: {fileID: 8300000, guid: 25775270e0458bc439ab7a3da0c6fc00, type: 3}
   buttonClickSfx: {fileID: 8300000, guid: 446703976e249f54d967262dee6e74f6, type: 3}
-  powerUpSfx: {fileID: 0}
+  powerUpSfx: {fileID: 8300000, guid: 446703976e249f54d967262dee6e74f6, type: 3}
+  powerUpDestroyedSfx: {fileID: 8300000, guid: f41839a04c494c74cb7d5ee1e622a6e1, type: 3}
+  bombPlaceSfx: {fileID: 8300000, guid: b18140d34aa8e3f44bd81631d30f53df, type: 3}
 --- !u!1 &9128846369998260693
 GameObject:
   m_ObjectHideFlags: 0

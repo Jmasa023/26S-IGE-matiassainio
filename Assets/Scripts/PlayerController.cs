@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         Bomb bomb = bombObject.GetComponent<Bomb>();
         bomb.Initialize(this, bombExplosionRadius);
         currentActiveBombs += 1;
+        AudioManager.Instance.PlayBombPlaceSfx();
     }
 
     public void Update()
@@ -77,7 +78,11 @@ public class PlayerController : MonoBehaviour
                 maxActiveBombs += 1;
                 break;
             case PowerUpType.SpeedPack:
-                movementSpeedMultiplier += 1;
+                movementSpeedMultiplier += 0.5f;
+                break;
+            case PowerUpType.HealthPack:
+                health += 1;
+                GameUI.Instance.SetPlayerHealthLabel(health);
                 break;
         }
     }

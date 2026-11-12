@@ -10,6 +10,7 @@ public class Bomb : MonoBehaviour
     private Collider ownerCollider;
     private bool isIgnoringOwnerCollider = true;
     public PlayerController owner;
+    public GameObject explosionVfx;
 
     public void Initialize(PlayerController owner, int explosionRadius)
     {
@@ -75,11 +76,29 @@ public class Bomb : MonoBehaviour
                 }
             }
         }
+        SpawnExplosion(transform.position);
+        for (int i = 0; i < directions.Length; i++)
+        {
+            SpawnDirectionalExplosions(directions[i], explosionRadius);
+        }
         AudioManager.Instance.PlayExplosionSfx();
         Destroy(gameObject);
     }
     private void OnDestroy()
     {
         owner.OnBombDestroyed();
+    }
+    private void SpawnExplosion(Vector3 spawnPosition)
+    {
+        Instantiate(explosionVfx, spawnPosition, Quaternion.identity);
+    }
+
+    private void SpawnDirectionalExplosions(Vector3 direction, int distanceSteps)
+    {
+        for (int i = 1; i <= distanceSteps; i++)
+        {
+            Vector3 spawnPosition = transform.position + direction * 2 * i;
+            SpawnExplosion(spawnPosition);
+        }
     }
 }
